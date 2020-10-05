@@ -4,6 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.roomdatabase13072020.model.entities.MovieEntity;
 
@@ -18,4 +19,7 @@ public interface MovieDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     Maybe<Long> insertMovie(MovieEntity movieEntity);
+
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    Maybe<Integer> updateMovie(MovieEntity movieEntity);
 }

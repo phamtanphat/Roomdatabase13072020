@@ -30,5 +30,8 @@ public class MovieRepository {
     public Maybe<Long> insertMovie(MovieEntity movieEntity){
         return mMovieDao.insertMovie(movieEntity);
     }
+    public Maybe<Integer> updateMovie(MovieEntity movieEntity){
+        return mMovieDao.updateMovie(movieEntity);
+    }
 
 }
