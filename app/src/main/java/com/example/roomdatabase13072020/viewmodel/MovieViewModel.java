@@ -22,10 +22,12 @@ import io.reactivex.schedulers.Schedulers;
 
 public class MovieViewModel extends ViewModel {
     private MutableLiveData<List<MovieEntity>> mArrayMovie;
+    private MutableLiveData<Long> mRowIdInsert;
     private MovieRepository mMovieRepository;
 
     public MovieViewModel(Context context) {
         this.mArrayMovie = new MutableLiveData<>();
+        this.mRowIdInsert = new MutableLiveData<>();
         mMovieRepository = MovieRepository.getInstance(context);
     }
 
@@ -56,9 +58,38 @@ public class MovieViewModel extends ViewModel {
                     }
                 });
     }
-
     public LiveData<List<MovieEntity>> getListMovie(){
         return mArrayMovie;
+    }
+    public void insertMovie(MovieEntity movieEntity){
+        mMovieRepository
+                .insertMovie(movieEntity)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new MaybeObserver<Long>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(Long aLong) {
+                        mRowIdInsert.setValue(aLong);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+    public LiveData<Long> getRowIdInsert(){
+        return mRowIdInsert;
     }
 
 }

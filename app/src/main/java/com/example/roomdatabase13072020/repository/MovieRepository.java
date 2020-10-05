@@ -27,6 +27,8 @@ public class MovieRepository {
     public Maybe<List<MovieEntity>> getListMovie(){
         return mMovieDao.getListMovie();
     }
-
+    public Maybe<Long> insertMovie(MovieEntity movieEntity){
+        return mMovieDao.insertMovie(movieEntity);
+    }
 
 }
