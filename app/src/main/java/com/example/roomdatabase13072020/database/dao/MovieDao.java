@@ -7,10 +7,10 @@ import com.example.roomdatabase13072020.model.entities.MovieEntity;
 
 import java.util.List;
 
-import io.reactivex.Flowable;
+import io.reactivex.Maybe;
 
 @Dao
 public interface MovieDao {
     @Query("SELECT * FROM Movie")
-    Flowable<List<MovieEntity>> getListMovie();
+    Maybe<List<MovieEntity>> getListMovie();
 }

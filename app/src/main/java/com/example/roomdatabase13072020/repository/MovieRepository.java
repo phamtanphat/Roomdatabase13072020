@@ -9,6 +9,7 @@ import com.example.roomdatabase13072020.model.entities.MovieEntity;
 import java.util.List;
 
 import io.reactivex.Flowable;
+import io.reactivex.Maybe;
 
 public class MovieRepository {
     private static MovieRepository mInstance = null;
@@ -23,7 +24,7 @@ public class MovieRepository {
         }
         return mInstance;
     }
-    public Flowable<List<MovieEntity>> getListMovie(){
+    public Maybe<List<MovieEntity>> getListMovie(){
         return mMovieDao.getListMovie();
     }
 

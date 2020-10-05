@@ -1,6 +1,7 @@
 package com.example.roomdatabase13072020.viewmodel;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -14,7 +15,9 @@ import org.reactivestreams.Subscription;
 import java.util.List;
 
 import io.reactivex.FlowableSubscriber;
+import io.reactivex.MaybeObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 public class MovieViewModel extends ViewModel {
@@ -31,19 +34,19 @@ public class MovieViewModel extends ViewModel {
                 .getListMovie()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new FlowableSubscriber<List<MovieEntity>>() {
+                .subscribe(new MaybeObserver<List<MovieEntity>>() {
                     @Override
-                    public void onSubscribe(Subscription s) {
+                    public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(List<MovieEntity> movieEntities) {
+                    public void onSuccess(List<MovieEntity> movieEntities) {
                         mArrayMovie.setValue(movieEntities);
                     }
 
                     @Override
-                    public void onError(Throwable t) {
+                    public void onError(Throwable e) {
 
                     }
 
